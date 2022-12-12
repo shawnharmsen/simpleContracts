@@ -10,7 +10,9 @@ contract FooScript is Script {
 
     function run() public {
         vm.startBroadcast();
-        foo = new Foo();
+        address stakingToken;
+        address rewardsToken;
+        foo = new Foo(stakingToken, rewardsToken);
         vm.stopBroadcast();
     }
 }
