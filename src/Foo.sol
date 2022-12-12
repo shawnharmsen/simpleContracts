@@ -59,10 +59,7 @@ contract Foo {
             return rewardPerTokenStored;
         }
 
-        return
-        rewardPerTokenStored +
-        (rewardRate * (lastTimeRewardApplicable() - updatedAt) * 1e18) /
-        totalSupply;
+        return rewardPerTokenStored + (rewardRate * (lastTimeRewardApplicable() - updatedAt) * 1e18) / totalSupply;
     }
 
     function stake(uint _amount) external updateReward(msg.sender) {
@@ -81,9 +78,7 @@ contract Foo {
 
     function earned(address _account) public view returns (uint) {
         return
-        ((balanceOf[_account] *
-        (rewardPerToken() - userRewardPerTokenPaid[_account])) / 1e18) +
-        rewards[_account];
+            ((balanceOf[_account] * (rewardPerToken() - userRewardPerTokenPaid[_account])) / 1e18) + rewards[_account];
     }
 
     function getReward() external updateReward(msg.sender) {
@@ -99,11 +94,7 @@ contract Foo {
         duration = _duration;
     }
 
-    function notifyRewardAmount(uint _amount)
-    external
-    onlyOwner
-    updateReward(address(0))
-    {
+    function notifyRewardAmount(uint _amount) external onlyOwner updateReward(address(0)) {
         if (block.timestamp >= finishAt) {
             rewardRate = _amount / duration;
         } else {
@@ -112,10 +103,7 @@ contract Foo {
         }
 
         require(rewardRate > 0, "reward rate = 0");
-        require(
-            rewardRate * duration <= rewardsToken.balanceOf(address(this)),
-            "reward amount > balance"
-        );
+        require(rewardRate * duration <= rewardsToken.balanceOf(address(this)), "reward amount > balance");
 
         finishAt = block.timestamp + duration;
         updatedAt = block.timestamp;
@@ -137,11 +125,7 @@ interface IERC20 {
 
     function approve(address spender, uint amount) external returns (bool);
 
-    function transferFrom(
-        address sender,
-        address recipient,
-        uint amount
-    ) external returns (bool);
+    function transferFrom(address sender, address recipient, uint amount) external returns (bool);
 
     event Transfer(address indexed from, address indexed to, uint value);
     event Approval(address indexed owner, address indexed spender, uint value);
