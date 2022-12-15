@@ -6,3 +6,6 @@
   branch = "0.2.1"
   path = "lib/prb-test"
   url = "https://github.com/paulrberg/prb-test"
+[submodule "lib/playpen"]
+	path = lib/playpen
+	url = https://github.com/zeframlou/playpen
